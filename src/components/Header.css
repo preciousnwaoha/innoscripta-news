@@ -1,0 +1,38 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--background-light);
+}
+
+
+.header nav {
+    display: flex;
+    gap: var(--space-3);
+
+}
+
+
+.header nav ul {
+    display: flex;
+    gap: var(--space-3);
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.header nav ul li {
+    font-size: var(--font-md);
+    font-weight: 500;
+}
+
+.header nav ul li a {
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+.header nav ul li a:hover {
+    color: var(--text);
+}
+

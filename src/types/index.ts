@@ -7,11 +7,12 @@ export interface TopicType {
 }
 
 export interface TopicItemType {
-  id: number;
+  id: string;
   title: string;
   description: string;
   image: string;
   datetime: string;
+  url: string;
   source: {
     name: string;
     url: string;
@@ -29,6 +30,18 @@ export interface TopicItemType {
   views: number;
 }
 
+
+export interface TopicsQueryParams {
+    topics: string[];
+    to?: string;
+    from?: string;
+    sortBy?: string;
+    language?: string;
+    pageSize?: number;
+    page?: number;
+  }
+
+  
 export interface NewsAPIResponseArticle {
   source: {
     id: null | string;
@@ -49,16 +62,6 @@ export interface NewsAPIResponse {
   articles: NewsAPIResponseArticle[];
 }
 
-export interface TopicsQueryParams {
-  topics: string[];
-  to?: string;
-  from: string;
-  sortBy?: string;
-  language?: string;
-  pageSize?: number;
-  page?: number;
-}
-
 export interface NewsAPITopHeadlinesParams {
   topic: string;
   country: string;
@@ -70,6 +73,20 @@ export interface NewsAPITopHeadlinesParams {
 export interface TheGuardianResponseArticle {
   id: string;
   type: string;
+  fields: {
+    thumbnail: string;
+    trailText: string;
+    headline: string;
+    byline: string;
+  };
+  tags: {
+    id: string;
+    type: "contributor" | "keyword" | "publication" | "type";
+    webTitle: string;
+    webUrl: string;
+    apiUrl: string;
+    references: string[];
+  }[]
   sectionId: string;
   sectionName: string;
   webPublicationDate: string;
@@ -148,6 +165,7 @@ export interface NYTResponseArticle {
   }[];
   lead_paragraph: string;
   multimedia: {
+    rank: number;
     url: string;
     format: string;
     height: number;
@@ -156,6 +174,7 @@ export interface NYTResponseArticle {
     subtype: string;
     caption: string;
     credit: string;
+    crop_name: string;
   }[];
   news_desk: string;
   print_page: string;

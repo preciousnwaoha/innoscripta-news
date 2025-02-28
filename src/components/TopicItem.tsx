@@ -1,40 +1,38 @@
-import { useEffect } from "react";
 import { TopicItemType } from "../types";
-import { useParams } from "react-router-dom";
+import Card from "./ui/Card";
+import "./TopicItem.css";
 
 interface TopicItemProps {
-  item: TopicItemType;
+  topic: TopicItemType;
 }
 
-const TopicItem = ({ item }: TopicItemProps) => {
-    const { id } = useParams()
-    // const [topic, setTopic] = useState<TopicItemType | null>(null)
-
-    console.log(id)
-
-    useEffect(() => {
-        // Fetch data from an API
-      }, [id]);
-
+const TopicItem = ({ topic }: TopicItemProps) => {
   return (
-    <li>
-      <h2>{item.name}</h2>
-      <p>{item.description}</p>
-      <img src={item.image} alt={item.name} />
-      <p>{item.datetime}</p>
+    <li className="topic-item">
+      <Card className="topic-item-card">
+        <a href={topic.url} target="_blank">
+          <img src={topic.image} alt={topic.title} />
+        </a>
 
-      <h3>Source</h3>
-      <a href={item.source.url} target="_blank">
-        <img src={item.source.image} alt={item.source.name} />
-      </a>
-      <h4>{item.source.name}</h4>
-      <a href={item.source.author.url} target="_blank">
-        <img
-          src={item.source.author.image}
-          alt={item.source.author.name}
-        />
-      </a>
-      <h5>{item.source.author.name}</h5>
+        <p className="date">{topic.datetime}</p>
+        <a href={topic.url} target="_blank">
+          <h2>{topic.title}</h2>
+        </a>
+
+        <h5 className="byline">{topic.author.name}</h5>
+        <a href={topic.url} target="_blank">
+          <p className="description">{topic.description} ...</p>
+        </a>
+
+        <div className="source">
+          <a href={topic.source.url} target="_blank">
+            {topic.source.image && (
+              <img src={topic.source.image} alt={topic.source.name} />
+            )}
+            <h4>{topic.source.name}</h4>
+          </a>
+        </div>
+      </Card>
     </li>
   );
 };

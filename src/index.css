@@ -1,25 +1,58 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
   color-scheme: light dark;
+
+  /* Colors */
+  --primary: rgba(100, 108, 255, 1);
+  --primary-light: rgba(100, 108, 255, 0.87);
+  --primary-dark: rgba(83, 91, 242, 1);
+  --secondary: rgb(77, 255, 64);
+  --secondary-light: rgba(77, 255, 64, 0.87);
+  --secondary-dark: rgba(77, 255, 64, 0.7);
+  --text: rgba(255, 255, 255, 0.87);
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --background: rgba(36, 36, 36, 1);
+  --background-light: rgba(47, 47, 47, 0.87);
+  --background-dark: rgba(26, 26, 26, 1);
+  
+
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
+  /* Typography */
+  --font-xs: 0.6rem;
+  --font-sm: 0.8rem;
+  --font-md: 1rem;
+  --font-lg: 1.2rem;
+  --font-xl: 1.6rem;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 2rem;
+  --space-5: 4rem;
+  --space-6: 8rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--space-3);
+  box-sizing: border-box;
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--primary);
   text-decoration: inherit;
+  cursor: pointer;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--primary-dark);
 }
 
 body {
@@ -42,12 +75,12 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--background-dark);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--primary);
 }
 button:focus,
 button:focus-visible {
@@ -56,13 +89,23 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    /* Colors light */
+    --primary: rgba(100, 108, 255, 1);
+    --primary-light: rgba(100, 108, 255, 0.87);
+    --primary-dark: rgb(116, 123, 255, 1);
+    --secondary: rgb(77, 255, 64);
+    --secondary-light: rgba(77, 255, 64, 0.87);
+    --secondary-dark: rgba(77, 255, 64, 0.7);
+    --text: rgba(0, 0, 0, 0.87);
+    --text-secondary: rgba(0, 0, 0, 0.6);
+    --background: rgba(255, 255, 255, 1);
+    --background-light: rgba(255, 255, 255, 0.87);
+    --background-dark: rgba(249, 249, 249, 1);
   }
   a:hover {
-    color: #747bff;
+    color: var(--primary-dark);
   }
   button {
-    background-color: #f9f9f9;
+    background-color: var(--background-dark);
   }
 }
