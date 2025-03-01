@@ -9,15 +9,14 @@ import ErrorComp from "../ui/ErrorComp";
 const Liked = () => {
   const { sources } = useSelector((state: RootState) => state.user);
 
-
   const queryParamsContruct: TopicsQueryParams = {
     topics: sources,
     fromUser: true,
-  }
+  };
 
-  const { data, error, allErrors, isLoading } = useGetTopicsAggregate(queryParamsContruct);
+  const { data, error, allErrors, isLoading } =
+    useGetTopicsAggregate(queryParamsContruct);
 
-  
   return (
     <div>
       <h3>Sources</h3>

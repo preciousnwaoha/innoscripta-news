@@ -24,14 +24,13 @@ const Liked = () => {
   });
 
   const finalData = data ? data.concat(nonFetchableLikes) : nonFetchableLikes;
-    return (
+  return (
     <div>
       <h3>Liked</h3>
 
       {isLoading && <Loading />}
       {error && <ErrorComp message={`Error ${error}`} />}
       {!finalData && <ErrorComp message={"No results found"} type="normal" />}
-
 
       {!isLoading && !error && finalData && (
         <ul className="results-list">
