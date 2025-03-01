@@ -1,0 +1,87 @@
+.search-results-page {
+    
+}
+
+/* Splitter container: mobile-first vertical stacking with animated transitions */
+.search-results-page-splitter {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    width: 100%;
+    transition: all 0.3s ease;
+    
+  }
+
+  
+.back-link-container {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  padding: var(--space-2) 0;
+  cursor: pointer;
+  /* transition:  */
+}
+
+.back-link-container:hover {
+  color: var(--secondary)
+}
+
+/* .search-results-page .search-results-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    white-space: nowrap;
+} */
+  
+  /* Apply transitions to all immediate children */
+  .search-results-page-splitter > * {
+    transition: flex 0.3s ease, max-width 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .search-results-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  
+  /* Larger screens: arrange items side-by-side */
+  @media (min-width: 768px) {
+    .search-results-page-splitter {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+    /* First child (filters) gets a fixed width */
+    .search-results-page-splitter > :first-child {
+      flex: 0 0 250px;
+      max-width: 250px;
+      border-radius: var(--space-2);
+    }
+    /* Second child (results) expands to fill remaining space */
+    .search-results-page-splitter > :last-child {
+      flex: 1;
+    }
+
+    
+  }
+  
+  /* Optional animations for entry/exit or on resize */
+  .search-results-page-splitter > * {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  /* Example of a hover animation for the filters (optional) */
+  .search-results-page-splitter > :first-child:hover {
+    /* Slightly enlarge on hover, for example */
+    transform: scale(1.02);
+  }
+  
+
+

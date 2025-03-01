@@ -12,6 +12,7 @@ export interface TopicItemType {
   description: string;
   image: string;
   datetime: string;
+  content: string | null,
   url: string;
   source: {
     name: string;
@@ -28,20 +29,24 @@ export interface TopicItemType {
   keywords: string[];
   likes: number;
   views: number;
+  apiSource: string;
 }
 
 
 export interface TopicsQueryParams {
-    topics: string[];
-    to?: string;
-    from?: string;
-    sortBy?: string;
-    language?: string;
-    pageSize?: number;
-    page?: number;
-  }
+  topics: string[];
+  to?: string;
+  from?: string;
+  sortBy?: string;
+  language?: string;
+  sources?: string[];
+  keywords?: string[];
+  pageSize?: number;
+  page?: number;
+  ids?: string[];
+  fromUser?: boolean;
+}
 
-  
 export interface NewsAPIResponseArticle {
   source: {
     id: null | string;
@@ -78,6 +83,7 @@ export interface TheGuardianResponseArticle {
     trailText: string;
     headline: string;
     byline: string;
+    body: string;
   };
   tags: {
     id: string;
@@ -86,7 +92,7 @@ export interface TheGuardianResponseArticle {
     webUrl: string;
     apiUrl: string;
     references: string[];
-  }[]
+  }[];
   sectionId: string;
   sectionName: string;
   webPublicationDate: string;

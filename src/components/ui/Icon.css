@@ -1,0 +1,21 @@
+.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .icon:hover {
+    color: var(--primary);
+  }
+  
+  /* Specific active state styles for like and save icons */
+  .like-icon.active {
+    color: var(--primary)
+  }
+  
+  .save-icon.active {
+    color: var(--primary)
+  }
+  

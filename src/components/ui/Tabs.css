@@ -1,0 +1,36 @@
+.tabs {
+
+}
+
+
+.tabs-labels {
+    border-bottom: 1px solid var(--background-light);
+    display: flex;
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+
+.tabs-label {
+    padding: var(--space-2) var(--space-2);
+    cursor: pointer;
+    font-size: var(--font-md);
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.tabs-label:hover {
+    color: var(--text);
+}
+
+.tabs-label.active {
+    border-bottom: 2px solid var(--primary);
+    color: var(--primary);
+}
+
+.tabs-content {
+    padding: var(--space-4) 0;
+}

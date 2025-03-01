@@ -1,0 +1,115 @@
+.search-filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--background-light);
+  border-radius: var(--space-2);
+}
+
+.search-filters p, .search-filters h3 {
+  margin: 0;
+}
+
+.search-filters .filter-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-group.sort-by {
+  display: none;
+}
+
+.filter-group-content {
+  display: none;
+}
+
+.opened.filter-group-content {
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-2);
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.filter-group h3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--background-light);
+  font-size: var(--font-md);
+  font-weight: 400;
+  text-transform: uppercase;
+  border-radius: var(--space-2);
+  padding: var(--space-2);
+  cursor: pointer;
+}
+
+
+
+@media screen and (max-width: 768px) {
+  .date-range-picker {
+    width: 100%;
+    display: flex;
+    flex-direction: row !important;
+    gap: var(--space-2);
+  }
+  
+  .date-range-picker > * {
+    display: flex;
+    width: calc(50% - 3rem);
+  }
+  
+}
+
+@media screen and (min-width: 768px) {
+  .search-filters {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    background-color: var(--background-light);
+  }
+
+  .search-filters .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .filter-group h3 {
+    
+    background-color: var(--background-light);
+    padding: var(--space-2) 0;
+    cursor: default;
+  }
+
+  .filter-group .icon {
+    display: none;
+  }
+
+  .filter-group.sort-by {
+    display: flex;
+  }
+
+  
+  
+
+  .filter-group .filter-group-content {
+    margin: 0 
+  }
+
+  .search-filters .filter-group h3 {
+    font-size: var(--font-md);
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .filter-group-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+}

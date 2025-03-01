@@ -1,0 +1,36 @@
+.select-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+  
+  /* Style the native select element */
+  .select-element {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 1rem;
+    border: 1px solid var(--background-light);
+    border-radius: 4px;
+    background-color: var(--background-light);
+    appearance: none; /* Remove default styling and arrow */
+    transition: border-color 0.2s ease;
+  }
+  
+  /* Focus state styling */
+  .select-element:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+  
+  /* Custom arrow indicator */
+  .select-container::after {
+    content: "▼";
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+  

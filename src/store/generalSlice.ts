@@ -1,7 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-    theme: "light"
+
+interface GeneralState {
+    theme: string;
+    breadcrumb: { label: string, href?: string }[];
+}
+
+const initialState: GeneralState = {
+    theme: "light",
+    breadcrumb: [ ]
 };
 
 const generalSlice = createSlice({
@@ -10,11 +17,21 @@ const generalSlice = createSlice({
     reducers: {
         toggleTheme(state) {
             state.theme = state.theme === "light" ? "dark" : "light";
+        },
+        updateBreadcrumb(state, action) {
+            state.breadcrumb = action.payload;
+        },
+        addBreadcrumb(state, action) {
+            state.breadcrumb.push(action.payload);
         }
+
     }
 });
 
-export const themeActions = generalSlice.actions;
+export const {
+    toggleTheme,
+    updateBreadcrumb
+} = generalSlice.actions;
 
 export default generalSlice.reducer;
 

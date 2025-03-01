@@ -1,0 +1,16 @@
+.like-and-save {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    border-radius: var(--space-2);
+    padding: var(--space-2);
+    border: 1px solid var(--background-light);
+  }
+
+  .like-and-save.inline {
+    justify-content: flex-start;
+    border: none;
+    padding: 0;
+    gap: var(--space-3);
+    
+  }

@@ -8,7 +8,7 @@ import type {
   NYTResponse,
 } from "../../types/index";
 import { envs } from "../../config/envs";
-import { formatDateToYYYYMMDD, mapNewsSortBy, topicsQuery } from "../../utils";
+import {mapNewsSortBy, topicsQuery } from "../../utils";
 
 export const topicsApi = createApi({
   reducerPath: "topicsApi",
@@ -16,10 +16,10 @@ export const topicsApi = createApi({
   endpoints: (builder) => ({
     // NewsAPI.org general endpoint
     getNewsAPIArticles: builder.query<TopicItemType[], TopicsQueryParams>({
-      query: ({ topics, from, sortBy, language, pageSize, page }) => ({
+      query: ({ topics, from, sortBy, language, pageSize, page, keywords }) => ({
         url: "https://newsapi.org/v2/everything",
         params: {
-          q: topicsQuery(topics),
+          q: topicsQuery(topics.concat(keywords ? keywords : [])),
           from: from,
           sortBy: mapNewsSortBy("newsapi", sortBy),
           apiKey: envs.API_KEY_NEWS_API_ORG,
@@ -30,7 +30,6 @@ export const topicsApi = createApi({
         },
       }),
       transformResponse: (response: NewsAPIResponse) => {
-        console.log(response);
 
         const topics = response.articles.map((article) => ({
           id: article.url,
@@ -38,9 +37,10 @@ export const topicsApi = createApi({
           description: article.description,
           image: article.urlToImage || "",
           datetime: article.publishedAt,
+          content: null,
           url: article.url,
           source: {
-            name: article.source.name,
+            name: article.source.name || "",
             url: article.url,
             image: "",
           },
@@ -54,37 +54,44 @@ export const topicsApi = createApi({
           keywords: [],
           likes: 0,
           views: 0,
+          apiSource: "newsapi",
         }));
 
         return topics;
       },
       transformErrorResponse: (
         response: { status: string | number }
-        // meta,
-        // arg
       ) => response.status,
     }),
 
     // The Guardian endpoint
     getTheGuardianArticles: builder.query<TopicItemType[], TopicsQueryParams>({
-      query: ({ topics, from, sortBy, pageSize, page, language }) => ({
+      query: ({
+        topics,
+        from,
+        sortBy,
+        pageSize,
+        page,
+        language,
+        ids,
+        fromUser,
+      }) => ({
         url: "https://content.guardianapis.com/search",
         params: {
-          q: topicsQuery(topics),
+          q: fromUser ? "" : topicsQuery(topics),
           "to-date": new Date().toISOString().split("T")[0],
           "from-date": from || new Date().toISOString().split("T")[0],
           "order-by": mapNewsSortBy("guardian", sortBy),
           "api-key": envs.API_KEY_THE_GUARDIAN,
-          "show-fields": "thumbnail,headline,trailText,byline,publication",
+          "show-fields": "thumbnail,headline,trailText,byline,publication,body",
           "show-tags": "contributor,keyword,publication,type",
           "page-size": pageSize || 10,
           page: page || 1,
           lang: language || "en",
+          ids: ids ? ids?.join(",") : undefined,
         },
       }),
       transformResponse: (response: TheGuardianResponse) => {
-        console.log(response);
-
         const topics: TopicItemType[] = response.response.results.map(
           (article) => {
             const contributor = article.tags.find(
@@ -100,6 +107,7 @@ export const topicsApi = createApi({
               description: article.fields.trailText,
               image: article.fields.thumbnail || "",
               datetime: article.webPublicationDate,
+              content: article.fields.body || null,
               url: article.webUrl,
               source: {
                 name: "The Guardian",
@@ -116,44 +124,47 @@ export const topicsApi = createApi({
               keywords,
               likes: 0,
               views: 0,
+              apiSource: "theguardian",
             };
           }
         );
 
         return topics;
       },
+      transformErrorResponse: (
+        response: { status: string | number }
+      ) => response.status,
     }),
 
     // New York Times endpoint
     getNewYorkTimesArticles: builder.query<TopicItemType[], TopicsQueryParams>({
-      query: ({ topics, from, sortBy, page }) => ({
-        url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
-        params: {
-          q: topicsQuery(topics),
-          end_date: formatDateToYYYYMMDD(
-            new Date().toISOString().split("T")[0]
-          ),
-          begin_date: formatDateToYYYYMMDD(
-            from || new Date().toISOString().split("T")[0]
-          ),
-          sort: mapNewsSortBy("nytimes", sortBy),
-          "api-key": envs.API_KEY_NEW_YORK_TIMES,
-          // fl: "web_url,headline,thumbnail",
-          page: page || 1,
-          facet_fields: "source,section_name,subsection_name,ingredients",
-          // fq: `source:("The New York Times")`,
-        },
-      }),
+      query: ({ topics, from, to, sortBy, page, keywords }) => {
+        return {
+          url: "https://api.nytimes.com/svc/search/v2/articlesearch.json",
+          params: {
+            q: topicsQuery(topics.concat(keywords ? keywords : [])),
+            end_date: to,
+            begin_date: from,
+            sort: mapNewsSortBy("nytimes", sortBy),
+            "api-key": envs.API_KEY_NEW_YORK_TIMES,
+            // fl: "web_url,headline,thumbnail",
+            page: page || 1,
+            facet_fields: "source,section_name,subsection_name,ingredients",
+          },
+        };
+      },
       transformResponse: (response: NYTResponse) => {
-        console.log(response);
         const { docs } = response.response;
         const topics: TopicItemType[] = docs.map((article) => {
           const thumbnailImage = article.multimedia.filter(
             (media) => media.subtype === "jumbo"
-          )[0]
-          const firstImage = article.multimedia.length > 0 ? article.multimedia[0].url : "";
+          )[0];
+          const firstImage =
+            article.multimedia.length > 0 ? article.multimedia[0].url : "";
 
-          const imageWithOrigin = thumbnailImage ? "https://www.nytimes.com/" + thumbnailImage.url : firstImage
+          const imageWithOrigin = thumbnailImage
+            ? "https://www.nytimes.com/" + thumbnailImage.url
+            : firstImage;
 
           return {
             id: article._id,
@@ -162,6 +173,7 @@ export const topicsApi = createApi({
             description: article.abstract,
             image: imageWithOrigin,
             datetime: article.pub_date,
+            content: null,
             url: article.web_url,
             source: {
               name: article.source || "The New York Times",
@@ -169,7 +181,7 @@ export const topicsApi = createApi({
               image: "",
             },
             author: {
-              name: article.byline.original,
+              name: article.byline.original || "",
               url: "",
               image: "",
             },
@@ -178,30 +190,17 @@ export const topicsApi = createApi({
             keywords: article.keywords.map((keyword) => keyword.value) || [],
             likes: 0,
             views: 0,
+            apiSource: "nytimes",
           };
         });
 
         return topics;
       },
-    }),
 
-    //  // NewsAPI AI endpoint
-    // getNewsAPIAIArticles: builder.query<TopicItemType[], TopicsQueryParams>({
-    //   query: ({ topics, from, sortBy, language, pageSize, page }) => ({
-    //     url: "https://eventregistry.org/api/v1/article/getArticles",
-    //     body: {
-    //       action: "getArticles",
-    //       resultType: "articles",
-    //       articlesSortBy: "date",
-    //       articlesSortByAsc: false,
-    //       keywords: topicsQuery(topics),
-    //       lang: language || "eng",
-    //       dateStart: from,
-    //       dateEnd: new Date().toISOString().split("T")[0],
-    //       articlesPage: page || 1,
-    //       articlesCount: pageSize || 10,
-    //       apiKey: envs.API_KEY_NEWS_API_AI,
-    //     }
+      transformErrorResponse: (
+        response: { status: string | number }
+      ) => response.status,
+    }),
   }),
 });
 

@@ -13,7 +13,6 @@
   --background: rgba(36, 36, 36, 1);
   --background-light: rgba(47, 47, 47, 0.87);
   --background-dark: rgba(26, 26, 26, 1);
-  
 
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
@@ -57,8 +56,8 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  /* display: flex; */
+  /* place-items: center; */
   min-width: 320px;
   min-height: 100vh;
 }
@@ -85,6 +84,27 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.page-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  white-space: nowrap;
+}
+
+.results-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
 }
 
 @media (prefers-color-scheme: light) {

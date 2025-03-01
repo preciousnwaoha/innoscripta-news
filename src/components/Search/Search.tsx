@@ -1,67 +1,70 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import {
-  updateSeachStates,
-  updateSearchResults,
-} from "../../store/topics/topicsSlice";
-import { useGetNewsAPIArticlesQuery } from "../../store/topics/topicsApiSlice";
+import { resetSearchFilters, updateSearchStates } from "../../store/topics/topicsSlice";
 import "./Search.css";
 import { RootState } from "../../store";
-import { useNavigate } from "react-router-dom";
-
+import { 
+  // useLocation,
+   useNavigate } from "react-router-dom";
+// import { updateBreadcrumb } from "../../store/generalSlice";
 
 const Search = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { searchFilters } = useSelector(
-    (state: RootState) => state.topics
-  );
+  // const location = useLocation();
+  const { searchStates } = useSelector((state: RootState) => state.topics);
 
-  const { dateFrom, dateTo, sortBy, page, pageSize } = searchFilters;
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchIsFocused, setSearchIsFocused] = useState(false);
+
 
   const {
-    data,
-    error: _error,
+    query: searchQuery,
+    active: searchIsFocused,
     isLoading: _isLoading,
-  } = useGetNewsAPIArticlesQuery({
-    topics: [searchQuery],
-    to: dateTo,
-    from: dateFrom,
-    sortBy,
-    pageSize,
-    page,
-  });
+    error: _error,
+  } = searchStates;
 
-  useEffect(() => {
-    dispatch(updateSearchResults(data));
+  const handleFocus = () => {
     dispatch(
-      updateSeachStates({
+      updateSearchStates({
+        query: searchQuery,
+        active: true,
+        isLoading: _isLoading,
+        error: _error,
+      })
+    );
+  };
+
+  const handleBlur = () => {
+    dispatch(
+      updateSearchStates({
+        query: searchQuery,
+        active: false,
+        isLoading: _isLoading,
+        error: _error,
+      })
+    );
+  };
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    
+    dispatch(
+      updateSearchStates({
+        query: e.target.value,
         active: searchIsFocused,
         isLoading: _isLoading,
         error: _error,
       })
     );
-  }, [data, _error, _isLoading, dispatch, searchIsFocused]);
-
-  const handleFocus = () => {
-    setSearchIsFocused(true);
-  };
-
-  const handleBlur = () => {
-    setSearchIsFocused(false);
-  };
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    dispatch(
+      resetSearchFilters()
+    )
     // Navigate to a search results route with the query as a URL parameter.
     navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
   };
+
 
   return (
     <div className={`search ${searchIsFocused ? "focused" : ""}`}>
