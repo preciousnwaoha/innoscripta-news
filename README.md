@@ -37,13 +37,10 @@ Innooscripta News is a powerful and intuitive news aggregation platform that pul
 
 ## Getting Started
 
-### Prerequisites
-
+### Installation
 - Node.js (v16+)
 - npm or yarn
 - Docker (for containerized deployment)
-
-### Installation
 
 1. **Clone the repository:**
    ```bash
@@ -87,12 +84,14 @@ Innooscripta News is a powerful and intuitive news aggregation platform that pul
 
 Build and deploy your app using Docker with the provided multi-stage file at ()[]
 
-
 **Build and run:**
 ```bash
 docker build -t innoscripta-news .
 docker run -p 80:80 innoscripta-news
 ```
+
+## Usage
+Visit: innoscriptanews.netlify.app
 
 ---
 
