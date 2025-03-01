@@ -1,48 +1,74 @@
 import "./AboutPage.css";
 import Header from "../components/Header";
+import { FaGithub, FaLinkedin, FaGlobe } from "react-icons/fa";
 
 const AboutPage = () => {
   return (
     <div className="about-page">
       <Header />
-      <h1>About Our Project</h1>
+      <h1>About INNews</h1>
       <p>
-        Discover our mission, values, and the story behind our innovative
-        journey.
+        Discover the mission, values, and story behind Innoscripta News (INNews)
+        – your trusted source for curated, innovative news.
       </p>
 
       <section className="about-content">
         <div className="about-section">
           <h2>Our Mission</h2>
           <p>
-            We aim to deliver exceptional user experiences by combining
-            cutting-edge technology with creative design. Our goal is to make
-            digital interactions both seamless and enjoyable.
+            At INNews, our mission is to revolutionize news consumption by
+            aggregating diverse, high-quality sources into one intuitive
+            platform. We aim to empower users with personalized content and an
+            exceptional digital experience.
           </p>
         </div>
 
         <div className="about-section">
           <h2>Our Story</h2>
           <p>
-            What began as a small idea has grown into a community of forward
-            thinkers and innovators. Every step of our journey has been fueled
-            by passion and a desire to push the boundaries of what's possible.
+            Born from a passion for innovation and a desire to enhance digital
+            news delivery, INNews has grown into a cutting-edge platform. Our
+            journey is fueled by creativity, technical excellence, and a
+            commitment to delivering reliable information.
           </p>
         </div>
 
         <div className="about-section">
           <h2>What We Offer</h2>
           <p>
-            From modern, responsive interfaces to robust backend solutions, our
-            project encompasses a wide range of features designed to empower
-            users and foster creativity. Explore our tools and join our growing
-            community.
+            INNews brings you an immersive news experience through modern,
+            responsive interfaces, advanced search and personalization features,
+            and seamless integration of top news sources. Explore our platform
+            and join a community of informed, engaged readers.
           </p>
         </div>
       </section>
 
       <footer className="about-footer">
-        <p>&copy; 2025 Your Company Name. All rights reserved.</p>
+        <div className="footer-links">
+          <a
+            href="https://github.com/preciousnwaoha/innoscripta-news"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaGithub size={24} />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/preciousnwaoha04"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaLinkedin size={24} />
+          </a>
+          <a
+            href="https://innoscripta.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaGlobe size={24} />
+          </a>
+        </div>
+        <p>&copy; 2025 INNews. All rights reserved.</p>
       </footer>
     </div>
   );

@@ -1,9 +1,18 @@
 /* src/components/Search.css */
 .search {
     position: relative;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
     transition: all 0.3s ease;
     padding: 0 var(--space-2);
+    width: 90vw;
+  }
+
+  .search form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
   }
   
   .search input {
@@ -19,7 +28,7 @@
   
   /* When the search is focused, expand the width and add a subtle shadow */
   .search.focused input {
-    width: 400px;
+    width: 100%;
     
     /* box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); */
   }
@@ -30,7 +39,13 @@
   }
 
   @media screen and (min-width: 768px) {
+    .search {
+      width: auto;
+    }
     .search input { 
       max-width: auto;
+    }
+    .search.focused input {
+      width: 400px;
     }
   }
