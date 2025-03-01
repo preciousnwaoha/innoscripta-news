@@ -1,19 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
-import { resetSearchFilters, updateSearchStates } from "../../store/topics/topicsSlice";
+import {
+  resetSearchFilters,
+  updateSearchStates,
+} from "../../store/topics/topicsSlice";
 import "./Search.css";
 import { RootState } from "../../store";
-import { 
-  // useLocation,
-   useNavigate } from "react-router-dom";
-// import { updateBreadcrumb } from "../../store/generalSlice";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const location = useLocation();
   const { searchStates } = useSelector((state: RootState) => state.topics);
-
-
 
   const {
     query: searchQuery,
@@ -45,7 +42,6 @@ const Search = () => {
   };
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    
     dispatch(
       updateSearchStates({
         query: e.target.value,
@@ -58,13 +54,10 @@ const Search = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(
-      resetSearchFilters()
-    )
+    dispatch(resetSearchFilters());
     // Navigate to a search results route with the query as a URL parameter.
     navigate(`/search?query=${encodeURIComponent(searchQuery)}`);
   };
-
 
   return (
     <div className={`search ${searchIsFocused ? "focused" : ""}`}>

@@ -1,0 +1,23 @@
+# Exclude node_modules (they will be installed in the container)
+node_modules
+
+# Exclude build output (if you're using a separate build folder like "dist")
+dist
+
+# Exclude Git repository files
+.git
+.gitignore
+
+# Exclude local environment files and sensitive data
+.env*
+!.env.example
+
+# Exclude log files
+*.log
+
+# Exclude IDE-specific directories
+.vscode
+.idea
+
+# Exclude test/coverage directories
+coverage
