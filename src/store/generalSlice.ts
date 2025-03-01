@@ -7,7 +7,7 @@ interface GeneralState {
 }
 
 const initialState: GeneralState = {
-    theme: "light",
+    theme: "dark",
     breadcrumb: [ ]
 };
 
