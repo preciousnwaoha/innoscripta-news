@@ -24,27 +24,27 @@ const ArticlePage = () => {
     }
   }, [data]);
 
-  if (!data) {
-    return <Navigate to="/" replace />;
-  }
+ 
 
-  const topic = data[0];
-
-  if (!topic || !topic.content) {
+  if (!data && !isLoading) {
     // Redirect to NotFoundPage if article data is missing
     return <Navigate to="/not-found" replace />;
   }
 
+
+  
+
+
   return (
     <div className="article-page">
       <Header />
-      <h1>{topic.title}</h1>
+      <h1>{data ? data[0].title : "Not found"}</h1>
       {isLoading && <Loading />}
 
-      {topic && !isLoading && (
+      {data && !isLoading && (
         <div
           className="article-content"
-          dangerouslySetInnerHTML={{ __html: topic.content }}
+          dangerouslySetInnerHTML={{ __html: data[0].content || "" }}
         />
       )}
     </div>
