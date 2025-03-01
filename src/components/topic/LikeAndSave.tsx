@@ -66,7 +66,7 @@ const LikeAndSave = ({ topic, className }: LikeAndSaveProps) => {
         icon={itemIsLiked ? <IoHeartSharp /> : <IoHeartOutline />}
       />
 
-      {topic.content && <Link to={`/article/${topic.id}`} state={{ topic }}>
+      {topic.content && <Link to={`/article/${topic.id}`} >
         <button className="read-more">
         Read More
         </button>
