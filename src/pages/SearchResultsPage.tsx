@@ -11,7 +11,6 @@ import useGetTopicsAggregate from "../hooks/useGetTopicsAggregate";
 import { updateSearchResults } from "../store/topics/topicsSlice";
 import { useEffect } from "react";
 import { HiArrowLongLeft } from "react-icons/hi2";
-// import Breadcrumb from "../components/ui/Breadcrum";
 
 const SearchResults = () => {
   const dispatch = useDispatch();
@@ -82,7 +81,7 @@ const SearchResults = () => {
       <p>{filteredResult ? filteredResult.length : 0} results found</p>
 
       <div className="search-results-page-splitter">
-        <SearchFilters />
+        {!isLoading && <SearchFilters />}
 
         <div className="search-results">
           {isLoading && <Loading />}

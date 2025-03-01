@@ -44,6 +44,21 @@
   box-sizing: border-box;
 }
 
+:root[data-theme="light"] {
+  /* Colors light */
+  --primary: rgba(100, 108, 255, 1);
+  --primary-light: rgba(100, 108, 255, 0.87);
+  --primary-dark: rgb(116, 123, 255, 1);
+  --secondary: rgb(77, 255, 64);
+  --secondary-light: rgba(77, 255, 64, 0.87);
+  --secondary-dark: rgba(77, 255, 64, 0.7);
+  --text: rgba(0, 0, 0, 0.87);
+  --text-secondary: rgba(0, 0, 0, 0.6);
+  --background: rgba(255, 255, 255, 1);
+  --background-light: rgba(204, 204, 204, 0.87);
+  --background-dark: rgba(249, 249, 249, 1);
+}
+
 a {
   font-weight: 500;
   color: var(--primary);
@@ -54,12 +69,25 @@ a:hover {
   color: var(--primary-dark);
 }
 
-body {
+body,
+html {
+  font-size: var(--font-md);
+  font-family: var(--font-family);
+  line-height: var(--line-height);
+  color: var(--text);
+  background-color: var(--background) !important;
+  margin: 0;
+  padding: 0;
+}
+
+body{
   margin: 0;
   /* display: flex; */
   /* place-items: center; */
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--background);
+  color: var(--text);
 }
 
 h1 {
@@ -74,7 +102,8 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: var(--background-dark);
+  background-color: var(--secondary-light);
+  color: var(--background);
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -108,20 +137,6 @@ button:focus-visible {
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    /* Colors light */
-    --primary: rgba(100, 108, 255, 1);
-    --primary-light: rgba(100, 108, 255, 0.87);
-    --primary-dark: rgb(116, 123, 255, 1);
-    --secondary: rgb(77, 255, 64);
-    --secondary-light: rgba(77, 255, 64, 0.87);
-    --secondary-dark: rgba(77, 255, 64, 0.7);
-    --text: rgba(0, 0, 0, 0.87);
-    --text-secondary: rgba(0, 0, 0, 0.6);
-    --background: rgba(255, 255, 255, 1);
-    --background-light: rgba(255, 255, 255, 0.87);
-    --background-dark: rgba(249, 249, 249, 1);
-  }
   a:hover {
     color: var(--primary-dark);
   }

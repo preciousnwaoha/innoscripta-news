@@ -87,11 +87,21 @@ Build and deploy your app using Docker with the provided multi-stage file at ()[
 **Build and run:**
 ```bash
 docker build -t innoscripta-news .
-docker run -p 80:80 innoscripta-news
+docker run -p 3000:3000 innoscripta-news
+```
+
+**Docker compose**
+```bash
+docker-compose -f docker-compose-dev.yml up --build
+```
+```bash
+docker-compose -f docker-compose.yml down
+docker-compose -f docker-compose.yml up --build
 ```
 
 ## Usage
-Visit: innoscriptanews.netlify.app
+The App is available to everyone right now
+Visit: [innoscriptanews.netlify.app](innoscriptanews.netlify.app)
 
 ---
 

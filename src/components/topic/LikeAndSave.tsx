@@ -67,7 +67,10 @@ const LikeAndSave = ({ topic, className }: LikeAndSaveProps) => {
       />
 
       {topic.content && <Link to={`/article/${topic.id}`} state={{ topic }}>
+        <button className="read-more">
         Read More
+        </button>
+        
       </Link>}
 
       <Icon

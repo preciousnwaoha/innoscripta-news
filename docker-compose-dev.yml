@@ -1,16 +1,19 @@
 version: "3.9"
 services:
-  frontend-prod:
+  frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile.prod
-    container_name: frontend-prod
+      dockerfile: Dockerfile
+    container_name: frontend
     restart: always
     ports:
       - 3000:3000
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
     env_file:
       - .env
     networks:
-     - network
-networks:
+      - network
+net works:
  network:

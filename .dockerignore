@@ -21,3 +21,7 @@ dist
 
 # Exclude test/coverage directories
 coverage
+
+
+Dockefile*
+.dockerignore

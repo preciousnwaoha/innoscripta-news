@@ -3,6 +3,7 @@
     position: relative;
     display: inline-block;
     transition: all 0.3s ease;
+    padding: 0 var(--space-2);
   }
   
   .search input {
@@ -13,6 +14,7 @@
     border: 1px solid var(--background-light);
     border-radius: var(--space-2);
     transition: width 0.3s ease, box-shadow 0.3s ease;
+    max-width: calc(100% - 2 * var(--space-2));
   }
   
   /* When the search is focused, expand the width and add a subtle shadow */
@@ -25,4 +27,10 @@
 
   .search input:focus, .search input:active {
     outline: 1px solid var(--primary);
+  }
+
+  @media screen and (min-width: 768px) {
+    .search input { 
+      max-width: auto;
+    }
   }

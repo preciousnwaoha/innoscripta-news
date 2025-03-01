@@ -14,3 +14,8 @@
     gap: var(--space-3);
     
   }
+
+.like-and-save .read-more {
+  display: inline-flex;
+  
+}
