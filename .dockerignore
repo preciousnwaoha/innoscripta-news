@@ -8,10 +8,6 @@ dist
 .git
 .gitignore
 
-# Exclude local environment files and sensitive data
-.env*
-!.env.example
-
 # Exclude log files
 *.log
 

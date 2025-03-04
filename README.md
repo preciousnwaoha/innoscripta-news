@@ -90,13 +90,15 @@ docker build -t innoscripta-news .
 docker run -p 3000:3000 innoscripta-news
 ```
 
-**Docker compose**
+**Docker compose (Dev)**
 ```bash
 docker-compose -f docker-compose-dev.yml up --build
 ```
+
+**Docker compose (Prod)**
 ```bash
-docker-compose -f docker-compose.yml down
-docker-compose -f docker-compose.yml up --build
+docker-compose -f docker-compose-dev.yml down
+docker-compose -f docker-compose-prod.yml up --build
 ```
 
 ## Usage
