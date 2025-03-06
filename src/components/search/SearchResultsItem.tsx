@@ -24,11 +24,12 @@ const SearchResultItem = ({
         </div>
       )}
 
-      <div className="content">
+      <div className="search-item-content-side">
         <div className="date-actions">
           <p className="date">{timeAgo(result.datetime)}</p>
-          <LikeAndSave topic={result} className="inline" />
+          <LikeAndSave topic={result} className="like-and-save mobile inline" />
         </div>
+
         <a href={result.url} target="_blank">
           <h3>{result.title}</h3>
         </a>
