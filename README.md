@@ -153,6 +153,3 @@ For more information or to discuss potential opportunities, feel free to reach o
 - **GitHub:** [Your GitHub Profile](https://github.com/preciousnwaoha)
 
 ---
-
-
-
